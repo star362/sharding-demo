@@ -1,0 +1,80 @@
+# 应用名称
+spring.application.name=sharding-demo
+# 应用服务 WEB 访问端口
+server.port=8080
+
+
+#配置数据源-多个库
+spring.shardingsphere.datasource.names=lic-c-0,lic-c-1
+#配置默认库
+spring.shardingsphere.sharding.default-data-source-name=lic-c-0
+
+spring.shardingsphere.datasource.lic-c-0.type=com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.lic-c-0.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.lic-c-0.url=jdbc:mysql://182.92.189.96:3306/lic-c-0?characterEncoding=utf-8&useUnicode=true&useSSL=false&serverTimezone=UTC
+spring.shardingsphere.datasource.lic-c-0.username=root
+spring.shardingsphere.datasource.lic-c-0.password=star.362
+spring.shardingsphere.datasource.lic-c-0.pool-name=HikariPool-lic-c-0
+#连接建立超时时间 单位ms 默认30000
+spring.shardingsphere.datasource.lic-c-0.connection-timeout=30000
+# 连接的最大持有时间,0为无限制 默认 30 分钟
+spring.shardingsphere.datasource.lic-c-0.max-lifetime=30000
+# 连接池中最大维持的连接数量 默认初始连接池是 10
+spring.shardingsphere.datasource.lic-c-0.maximum-pool-size=50
+
+spring.shardingsphere.datasource.lic-c-1.type=com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.lic-c-1.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.lic-c-1.url=jdbc:mysql://182.92.189.96:3306/lic-c-1?characterEncoding=utf-8&useUnicode=true&useSSL=false&serverTimezone=UTC
+spring.shardingsphere.datasource.lic-c-1.username=root
+spring.shardingsphere.datasource.lic-c-1.password=star.362
+spring.shardingsphere.datasource.lic-c-1.pool-name=HikariPool-lic-c-1
+#连接建立超时时间 单位ms 默认30000
+spring.shardingsphere.datasource.lic-c-1.connection-timeout=30000
+# 连接的最大持有时间,0为无限制 默认 30 分钟
+spring.shardingsphere.datasource.lic-c-1.max-lifetime=30000
+# 连接池中最大维持的连接数量 默认初始连接池是 10
+spring.shardingsphere.datasource.lic-c-1.maximum-pool-size=50
+# 广播表
+spring.shardingsphere.rules.sharding.broadcast-tables=star_demo
+
+spring.shardingsphere.rules.sharding.key-generators.snowflake.type=SNOWFLAKE
+spring.shardingsphere.rules.sharding.key-generators.snowflake.props.worker-id=123
+
+
+spring.shardingsphere.rules.tables.test.actualDataNodes=lic-c-$->{0..1}.test_$->{2021..2022}_$->{1..12}
+# 分表设置字段
+spring.shardingsphere.rules.tables.test.tableStrategy.standard.shardingColumn=create_time
+#分表规则名称
+spring.shardingsphere.rules.tables.test.tableStrategy.standard.shardingAlgorithmName=test_shard
+
+#分库设置(如果多个表分库字段和规则相同，可以不用设置每个表分库规则，设置一个默认分库规则defaultDatabaseStrategy就可以)
+spring.shardingsphere.rules.tables.test.databaseStrategy.standard.shardingColumn=id
+spring.shardingsphere.rules.tables.test.databaseStrategy.standard.shardingAlgorithmName=test_DB_shard
+spring.shardingsphere.rules.tables.test.keyGenerateStrategy.column=id
+spring.shardingsphere.rules.tables.test.keyGenerateStrategy.keyGeneratorName=snowflake
+
+spring.shardingsphere.rules.bindingTables=
+
+
+
+
+
+## 默认分库策略 支持3种 standard:用于单分片键的标准分片场景 \
+# complex:用于多分片键的复合分片场景 \ inline:行表达式分片策略 \ hint:Hint分片策略 none:不分片 只能选择一种  同时分表策略一样可以使用
+#分库键
+spring.shardingsphere.sharding.default-database-strategy.inline.sharding-column=id
+# 分库键 % 2 余数 == master？当出现读写分离使用ds_u$ 没有读写分离 则u$ (u0)
+spring.shardingsphere.sharding.default-database-strategy.inline.algorithm-expression=lic-c-$->{id % 2}  
+
+
+
+#由数据源名 + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式
+spring.shardingsphere.sharding.tables.test.actual-data-nodes=lic-c-$->{0..1}.test_$->{2021..2022}_$->{1..12}
+spring.shardingsphere.sharding.tables.test.table-strategy.standard.sharding-column= create_time
+spring.shardingsphere.sharding.tables.test.table-strategy.standard.precise-algorithm-class-name= io.ian.demo.core.shardingjdbc.DatePreciseShardingAlgorithm
+spring.shardingsphere.sharding.tables.test.table-strategy.standard.range-algorithm-class-name= io.ian.demo.core.shardingjdbc.DateRangeShardingAlgorithm
+
+
+
+# 显示 sql
+spring.shardingsphere.props.sql.show=true
