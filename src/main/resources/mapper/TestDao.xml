@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sharding.demo.shardingdemo.dao.TestDao">
+
+    <resultMap type="com.sharding.demo.shardingdemo.entity.TestEntity" id="EmailInfoMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <insert id="saveinfo" parameterType="com.sharding.demo.shardingdemo.entity.TestEntity">
+        insert into test (id,create_time,remark) values (${id},now(), ${remark})
+        <!-- 指定结果类型resultType，keyProperty是属性，自动返回到属性id中，order是次序，after是指获取id是在于插入后 -->
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
+
+</mapper>

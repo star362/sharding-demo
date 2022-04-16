@@ -10,4 +10,6 @@ import com.sharding.demo.shardingdemo.entity.TestEntity;
  * @author wangyu@mvtech.com.cn
  */
 public interface TestDao extends BaseMapper<TestEntity> {
+
+    int saveinfo(TestEntity testEntity);
 }
