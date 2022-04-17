@@ -11,52 +11,71 @@ spring:
           key-generator-name: snowflake # 分布式序列算法名称
         tables:
           test:
-            actual-data-nodes: lic-c-1.test_2022_1
+            actual-data-nodes: lic-c-$->{0..1}.test_$->{2021..2022}_$->{1..12}
             # 分表
             table-strategy:
               standard:
                 sharding-column: create_time
-                sharding-algorithm-name: com.sharding.demo.shardingdemo.sharding.TablesShardingAlgorithm
+                sharding-algorithm-name: bytablesignandid3
             # 分库
             database-strategy:
-              inline:
+              standard:
                 sharding-column: id
-                algorithm-expression: lic-c-$->{id.intdiv(2)%2}
+                sharding-algorithm-name: byid
             key-generate-strategy: # 分布式序列策略
               column: id # 自增列名称，缺省表示不使用自增主键生成器
               key-generator-name: snowflake # 分布式序列算法名称
           star_demo:
             actual-data-nodes: lic-c-$->{0..1}.star_demo
-#        分片算法名称和配置
+        #        分片算法名称和配置
         sharding-algorithms:
-          # 策略名称 表策略 按照月份
-          bytablesignandid:
-            # 分片类型
-            type: auto_interval
+          byid:
+            type: INLINE
             props:
-              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
+              algorithm-expression: lic-c-$->{id%2}
+#          bytablesignandid2:
+#            type: CLASS_BASED
+#            props:
+#              strategy: STANDARD
+#              algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.TablesShardingAlgorithm
+
+          bytablesignandid3:
+            type: INTERVAL
+            props:
+              datetime-pattern: "yyyy-MM-dd HH:mm:ss"
               datetime-lower: "2021-01-01 00:00:00"
-              # 分片秒数 这里是一天一张表 所以秒数为86400秒  要加""不然会被解析为非字符串类型导致拿不到值
-              sharding-seconds: "31536000"
-              # 分片结束时间 要加""不然会被解析为非字符串类型导致拿不到值
               datetime-upper: "2022-12-31 23:59:59"
+              sharding-suffix-pattern:  "yyyy_M"
+              datetime-interval-amount: 1
+              datetime-interval-unit: MONTHS
+          # 策略名称 表策略 按照月份
+#          bytablesignandid:
+#            # 分片类型
+#            type: auto_interval
+#            props:
+#              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
+#              datetime-lower: "2021-01-01 00:00:00"
+#              # 分片秒数 这里是一天一张表 所以秒数为86400秒  要加""不然会被解析为非字符串类型导致拿不到值
+#              sharding-seconds: "31536000"
+#              # 分片结束时间 要加""不然会被解析为非字符串类型导致拿不到值
+#              datetime-upper: "2022-12-31 23:59:59"
 #      广播表规则列表
         broadcast-tables:
           - star_demo
-#        默认分库分表策略 默认不分片
+        #        默认分库分表策略 默认不分片
         default-database-strategy:
           none:
         default-table-strategy:
           none:
-#            自增列生成算法名称和配置
+        #            自增列生成算法名称和配置
         key-generators:
           snowflake:
             type: SNOWFLAKE
             props:
               worker-id: 999
-#              最大抖动上限值，范围[0, 4096)。注：若使用此算法生成值作分片值，建议配置此属性。此算法在不同毫秒内所生成的 key 取模 2^n (2^n一般为分库或分表数) 之后结果总为 0 或 1。为防止上述分片问题，建议将此属性值配置为 (2^n)-1
+              #              最大抖动上限值，范围[0, 4096)。注：若使用此算法生成值作分片值，建议配置此属性。此算法在不同毫秒内所生成的 key 取模 2^n (2^n一般为分库或分表数) 之后结果总为 0 或 1。为防止上述分片问题，建议将此属性值配置为 (2^n)-1
               max-vibration-offset: 1
-#              最大容忍时钟回退时间，单位：毫秒
+              #              最大容忍时钟回退时间，单位：毫秒
               max-tolerate-time-difference-milliseconds: 100000
     datasource:
       names: lic-c-0,lic-c-1

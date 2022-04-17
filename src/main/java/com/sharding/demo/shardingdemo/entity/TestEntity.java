@@ -23,6 +23,6 @@ public class TestEntity {
 
     @TableId
     private Long id;
-    private Date createTime;
+    private String createTime;
     private String remark;
 }

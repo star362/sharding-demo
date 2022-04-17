@@ -7,12 +7,12 @@
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" />
     </resultMap>
-
+    <!--        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">-->
+    <!--            SELECT LAST_INSERT_ID()-->
+    <!--        </selectKey>-->
     <insert id="saveinfo" parameterType="com.sharding.demo.shardingdemo.entity.TestEntity">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into test (create_time,remark) values (now(), ${remark})
+
+        insert into test (id,create_time,remark) values (#{id},#{createTime}, #{remark})
 
     </insert>
 
