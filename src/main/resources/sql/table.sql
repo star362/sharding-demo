@@ -202,3 +202,61 @@ create table test_2022_9
 );
 
 
+
+
+
+
+
+
+
+
+
+SELECT * from test_2021_1
+union
+SELECT * from test_2021_2
+union
+SELECT * from test_2021_3
+union
+SELECT * from test_2021_4
+union
+SELECT * from test_2021_5
+union
+SELECT * from test_2021_6
+union
+SELECT * from test_2021_7
+union
+SELECT * from test_2021_8
+union
+SELECT * from test_2021_9
+union
+SELECT * from test_2021_10
+union
+SELECT * from test_2021_11
+union
+SELECT * from test_2021_12
+union
+SELECT * from test_2022_1
+union
+SELECT * from test_2022_2
+union
+SELECT * from test_2022_3
+union
+SELECT * from test_2022_4
+union
+SELECT * from test_2022_5
+union
+SELECT * from test_2022_6
+union
+SELECT * from test_2022_7
+union
+SELECT * from test_2022_8
+union
+SELECT * from test_2022_9
+union
+SELECT * from test_2022_10
+union
+SELECT * from test_2022_11
+union
+SELECT * from test_2022_12
+
+
