@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
-import java.util.List;
 
 @SpringBootTest
 class ShardingDemoApplicationTests {
@@ -25,8 +24,10 @@ class ShardingDemoApplicationTests {
     @Test
     void contextLoads() {
 
-        final StarDemoEntity build = StarDemoEntity.builder().createTime(new Date(System.currentTimeMillis())).age(22).remarks("222").build();
-        System.out.println(starService.insert(build));
+        final StarDemoEntity build = StarDemoEntity.builder().sex("男").starName("star").createTime(new Date(System.currentTimeMillis())).age(22).remarks("222").build();
+//        starService.insert(build);
+        starService.saveinfo(build);
+        log.info("StarDemoEntity[{}]", build);
 
     }
 
@@ -34,8 +35,9 @@ class ShardingDemoApplicationTests {
     @Test
     void contextLoads2() {
         for (int i = 0; i < 8; i++) {
-
-            System.out.println(starService.selectCount(null));
+//            System.out.println(starService.selectCount(null));
+            int findcount = starService.findcount();
+            log.info("==========[{}]", findcount);
         }
     }
 
@@ -52,7 +54,7 @@ class ShardingDemoApplicationTests {
     @Test
     void testServiceinsert() {
 
-        final TestEntity entity = TestEntity.builder().id(1L).remark("" + 0).build();
+        final TestEntity entity = TestEntity.builder().remark("" + 0).build();
         testService.saveinfo(entity);
         log.info("===插入成功==[{}]", entity);
 

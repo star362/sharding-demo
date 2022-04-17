@@ -3,8 +3,13 @@
 <mapper namespace="com.sharding.demo.shardingdemo.dao.StarDemoDao">
 
     <resultMap type="com.sharding.demo.shardingdemo.entity.StarDemoEntity" id="EmailInfoMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
         <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <insert id="saveinfo" parameterType="com.sharding.demo.shardingdemo.entity.StarDemoEntity">
+
+        insert into star_demo (id,age,sex,star_name,create_time,remarks) values (#{id},#{age},#{sex},#{starName},now(), #{remarks})
+
+    </insert>
 </mapper>

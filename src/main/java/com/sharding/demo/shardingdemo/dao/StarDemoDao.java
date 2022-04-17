@@ -2,6 +2,7 @@ package com.sharding.demo.shardingdemo.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * Description: <br>
@@ -10,4 +11,10 @@ import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
  * @author wangyu@mvtech.com.cn
  */
 public interface StarDemoDao extends BaseMapper<StarDemoEntity> {
+
+
+    int saveinfo(StarDemoEntity starDemoEntity);
+
+    @Select("select count(1) from star_demo")
+    int findcount();
 }

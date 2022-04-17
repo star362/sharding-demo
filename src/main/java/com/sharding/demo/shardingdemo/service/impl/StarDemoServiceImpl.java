@@ -1,6 +1,7 @@
 package com.sharding.demo.shardingdemo.service.impl;
 
 import com.sharding.demo.shardingdemo.dao.StarDemoDao;
+import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
 import com.sharding.demo.shardingdemo.service.StarDemoService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,13 @@ public class StarDemoServiceImpl implements StarDemoService {
     StarDemoDao starDemoDao;
 
 
+    @Override
+    public int saveinfo(StarDemoEntity starDemoEntity) {
+        return starDemoDao.saveinfo(starDemoEntity);
+    }
+
+    @Override
+    public int findcount() {
+        return starDemoDao.findcount();
+    }
 }
