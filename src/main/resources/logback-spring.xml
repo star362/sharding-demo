@@ -67,7 +67,7 @@
 
 
     <!-- 开发环境和测试环境 -->
-<!--    <springProfile name="dev,test,testcd">-->
+<!--    <springProfile name="dev">-->
 <!--        <root level="INFO">-->
 <!--            <appender-ref ref="STDOUT"/>-->
 <!--            <appender-ref ref="FILE"/>-->
