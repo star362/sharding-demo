@@ -17,7 +17,7 @@ import java.util.Properties;
  *
  * @author wangyu@mvtech.com.cn
  */
-@Component
+//@Component
 public class TablesShardingAlgorithm implements StandardShardingAlgorithm<Date> {
 
     private static final Logger log = LoggerFactory.getLogger(TablesShardingAlgorithm.class);

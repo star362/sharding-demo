@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+
+	<springProperty scope="context" name="springAppName" source="spring.application.name" />
+	
+	<!-- 日志格式 -->
+	<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${springAppName:-}: %X{traceId:-N/A}] [%-4level] %logger{50} - %msg%n" />
+	
+	<!-- Console 输出设置 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 日志文件保存规则，以天为单位，最大为100MB文件，历史文件进行gz压缩，最多保存30天历史 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    	<FileNamePattern>${user.dir}/logs/sharding-demo.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+	      	<MaxHistory>7</MaxHistory>
+			<!-- 日志保留最大的值，超过这个则删除旧的日志 -->
+			<totalSizeCap>2GB</totalSizeCap>
+			<!-- 设置这个启动时MaxHistory才生效，才会删日志 -->
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+	      	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	      		<maxFileSize>100MB</maxFileSize> 
+	      	</timeBasedFileNamingAndTriggeringPolicy>
+	    </rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 错误日志 -->
+	<appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 拦截处理ERROR级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- 设置日志输出格式 -->
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<!-- 设置编码格式，以防中文乱码 -->
+			<charset>utf8</charset>
+		</encoder>
+		<!-- 当前日这个类型的所有日志。当日志超出下面设置的大小会分割压缩放到info文件夹下，但error.log不改变，直到第二天才会重置 -->
+		<File>${user.dir}/logs/sharding-demo-error.log</File>
+		<!--滚动策略，靠这个来生成不同文件。  TimeBasedRollingPolicy 不能设置文件大小，所以用SizeAndTimeBasedRollingPolicy-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!--日志存放路径。注意路径后面如果加.zip等压缩文件类型结尾的，超过单个文件最大值进行分割时会自动对文件进行压缩-->
+			<fileNamePattern>${user.dir}/logs/error/sharding-demo-error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- 日志文件保留天数，超过这个则删除旧的日志 -->
+			<MaxHistory>7</MaxHistory>
+			<!-- 日志文件最大值，超过则进行分割 -->
+			<maxFileSize>100MB</maxFileSize>
+			<!-- 日志保留最大的值，超过这个则删除旧的日志 -->
+			<totalSizeCap>2GB</totalSizeCap>
+			<!-- 设置这个启动时MaxHistory才生效，才会删日志 -->
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+	</appender>
+
+
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+<!--		<appender-ref ref="fileErrorLog"/>-->
+	</root>
+	
+</configuration>
