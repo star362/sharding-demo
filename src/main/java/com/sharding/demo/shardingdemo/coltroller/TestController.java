@@ -27,4 +27,9 @@ public class TestController {
         return aLong.toString();
     }
 
+    @GetMapping("b")
+    public String b(){
+
+        return "success";
+    }
 }
