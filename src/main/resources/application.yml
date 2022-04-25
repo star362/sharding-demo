@@ -22,9 +22,11 @@ spring:
 #                sharding-algorithm-name: bytablesignandid2
             # 分库
             database-strategy:
-              standard:
-                sharding-column: id
-                sharding-algorithm-name: byid
+#              standard:
+#                sharding-column: id
+#                sharding-algorithm-name: byid
+              hint:
+                sharding-algorithm-name: db_hint_test
             key-generate-strategy: # 分布式序列策略
               column: id # 自增列名称，缺省表示不使用自增主键生成器
               key-generator-name: snowflake # 分布式序列算法名称
@@ -40,7 +42,10 @@ spring:
             type: COMP_TEST
             props:
               algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.TablesShardingAlgorithm
-
+          db_hint_test:
+            type: HINT_TEST
+            props:
+              algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.DBShardingAlgorithm
           bytablesignandid3:
             type: INTERVAL
             props:
@@ -84,9 +89,9 @@ spring:
       lic-c-0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://192.168.0.71:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: 123456
+        password: root
         pool-name: HikariPool-lic-c-0
         #连接建立超时时间 单位ms 默认30000
         connection-timeout: 30000
@@ -97,9 +102,9 @@ spring:
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://192.168.0.71:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: 123456
+        password: root
         pool-name: HikariPool-lic-c-1
         #连接建立超时时间 单位ms 默认30000
         connection-timeout: 30000

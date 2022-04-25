@@ -5,13 +5,13 @@ import com.sharding.demo.shardingdemo.dao.StarDemoDao;
 import com.sharding.demo.shardingdemo.dao.TestDao;
 import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
 import com.sharding.demo.shardingdemo.entity.TestEntity;
+import org.apache.shardingsphere.infra.hint.HintManager;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Wrapper;
 import java.util.Date;
 import java.util.List;
 
@@ -52,13 +52,17 @@ class ShardingDemoApplicationTests {
 //        final Long arg = testService.selectCount(null);
 //        TestEntity build = TestEntity.builder().id(1515598883979067394L).build();
 //        TestEntity build = TestEntity.builder().id(1515608863562113025L).build();
-        TestEntity build = TestEntity.builder().remark("0").build();
+        TestEntity build = TestEntity.builder().build();
         QueryWrapper<TestEntity> wrapper=new QueryWrapper();
         wrapper.setEntity(build);
         List<TestEntity> testEntities = testService.selectList(wrapper);
         testEntities.forEach(arg->{log.info("=====[{}]", arg);});
 
     }
+
+
+//    https://community.sphere-ex.com/t/topic/727
+//    https://community.sphere-ex.com/t/topic/824
 
     @Test
     void testServiceinsert() {
@@ -77,6 +81,23 @@ class ShardingDemoApplicationTests {
 //        final TestEntity entity = TestEntity.builder().createTime(new Date(System.currentTimeMillis())).remark("" + 0).build();
 //        testService.insert(entity);
 //        log.info("===插入成功==[{}]", entity);
+
+    }
+
+
+    @Test
+    public void testHint(){
+        HintManager hintManager=HintManager.getInstance();
+        hintManager.setDatabaseShardingValue(0);
+
+        TestEntity build = TestEntity.builder().build();
+        QueryWrapper<TestEntity> wrapper=new QueryWrapper();
+        wrapper.setEntity(build);
+        List<TestEntity> testEntities = testService.selectList(wrapper);
+        testEntities.forEach(arg->{log.info("=====[{}]", arg);});
+
+        hintManager.clearShardingValues();
+        hintManager.close();
 
     }
 

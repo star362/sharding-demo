@@ -1,58 +1,42 @@
-//package com.sharding.demo.shardingdemo.sharding;
-//
-//import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
-//import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
-//import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-//import java.util.Collection;
-//import java.util.Properties;
-//
-///**
-// * Description: 分库规则<br>
-// * Create Date: 2022/4/16 下午1:49 <br>
-// *
-// * @author wangyu@mvtech.com.cn
-// */
-//public class DBShardingAlgorithm implements StandardShardingAlgorithm<String> {
-//
-//    private static final Logger log = LoggerFactory.getLogger(TablesShardingAlgorithm.class);
-//
-//
-//
-//    @Override
-//    public String doSharding(Collection<String> collection, PreciseShardingValue<String> preciseShardingValue) {
-//        log.info("=====DBShardingAlgorithm=====");
-//        return null;
-//    }
-//
-//    @Override
-//    public Collection<String> doSharding(Collection<String> collection, RangeShardingValue<String> rangeShardingValue) {
-//        log.info("=====DBShardingAlgorithm2=====");
-//        return null;
-//    }
-//
-//    @Override
-//    public void init() {
-//        log.info("=====DBShardingAlgorithm3=====");
-//    }
-//
-//    @Override
-//    public String getType() {
-//        log.info("=====DBShardingAlgorithm4=====");
-//        return null;
-//    }
-//
-//    @Override
-//    public Properties getProps() {
-//        log.info("=====DBShardingAlgorithm5=====");
-//        return null;
-//    }
-//
-//    @Override
-//    public void setProps(Properties properties) {
-//        log.info("=====DBShardingAlgorithm==6===");
-//
-//    }
-//}
+package com.sharding.demo.shardingdemo.sharding;
+
+import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingAlgorithm;
+import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+/**
+ * Description: 强制分片<br>
+ * Create Date: 2022/4/16 下午1:49 <br>
+ *
+ * @author wangyu@mvtech.com.cn
+ */
+public class DBShardingAlgorithm implements HintShardingAlgorithm<String> {
+
+    private static final Logger log = LoggerFactory.getLogger(TablesShardingAlgorithm.class);
+
+
+    @Override
+    public Collection<String> doSharding(Collection<String> collection, HintShardingValue<String> hintShardingValue) {
+
+        Collection<String> values = hintShardingValue.getValues();
+        log.info("=======lic-c-0=====lic-c-1==========", values);
+
+
+
+        return Arrays.asList("lic-c-"+values.toArray()[0]);
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public String getType() {
+        return "HINT_TEST";
+    }
+}
