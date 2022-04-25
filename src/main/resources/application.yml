@@ -93,12 +93,18 @@ spring:
         username: root
         password: root
         pool-name: HikariPool-lic-c-0
-        #连接建立超时时间 单位ms 默认30000
-        connection-timeout: 30000
-        # 连接的最大持有时间,0为无限制 默认 30 分钟
+        #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
-        # 连接池中最大维持的连接数量 默认初始连接池是 10
-        maximum-pool-size: 50
+        #最大连接数，小于等于0会被重置为默认值10；大于零小于1会被重置为minimum-idle的值
+        maximum-pool-size: 30
+        #连接超时时间:毫秒，小于250毫秒，否则被重置为默认值30秒
+        connection-timeout: 30000
+        #最小空闲连接，默认值10，小于0或大于maximum-pool-size，都会重置为maximum-pool-size
+        minimum-idle: 10
+        # 默认是600000毫秒，即10分钟。如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0；
+        # 如果idleTimeout!=0且小于10秒，则会被重置为10秒。如果idleTimeout=0则表示空闲的连接在连接池中永远不被移除
+        # 只有当minimumIdle小于maximumPoolSize时，这个参数才生效，当空闲连接数超过minimumIdle，而且空闲时间超过idleTimeout，则会被移除。
+        idle-timeout: 28000
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -106,12 +112,18 @@ spring:
         username: root
         password: root
         pool-name: HikariPool-lic-c-1
-        #连接建立超时时间 单位ms 默认30000
-        connection-timeout: 30000
-        # 连接的最大持有时间,0为无限制 默认 30 分钟
+        #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
-        # 连接池中最大维持的连接数量 默认初始连接池是 10
-        maximum-pool-size: 50
+        #最大连接数，小于等于0会被重置为默认值10；大于零小于1会被重置为minimum-idle的值
+        maximum-pool-size: 30
+        #连接超时时间:毫秒，小于250毫秒，否则被重置为默认值30秒
+        connection-timeout: 30000
+        #最小空闲连接，默认值10，小于0或大于maximum-pool-size，都会重置为maximum-pool-size
+        minimum-idle: 10
+        # 默认是600000毫秒，即10分钟。如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0；
+        # 如果idleTimeout!=0且小于10秒，则会被重置为10秒。如果idleTimeout=0则表示空闲的连接在连接池中永远不被移除
+        # 只有当minimumIdle小于maximumPoolSize时，这个参数才生效，当空闲连接数超过minimumIdle，而且空闲时间超过idleTimeout，则会被移除。
+        idle-timeout: 28000
     sharding:
       default-data-source-name: lic-c-0
       default-database-strategy:
