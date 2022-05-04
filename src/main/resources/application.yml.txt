@@ -1,139 +1,19 @@
 spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: ${spring.application.nacos} # 配置服务地址
+        namespace: ${spring.application.product}
+        group: ${spring.application.env}
+        file-extension: yaml
+      discovery:
+        server-addr: ${spring.application.nacos} # 注册服务地址
+        namespace: ${spring.application.product}
+        group: ${spring.application.env}
+  main:
+    allow-bean-definition-overriding: true
   application:
+    product: PUBLIC
+    env: DEV
+    nacos: 182.92.189.96:8848
     name: sharding-demo
-  shardingsphere:
-    schema:
-      name: lic_db
-    rules:
-      sharding:
-        default-key-generate-strategy:
-          type: SNOWFLAKE # 默认自增列值生成器类型，缺省将使用 org.apache.shardingsphere.core.keygen.generator.impl.SnowflakeKeyGenerator。可使用用户自定义的列值生成器或选择内置类型：SNOWFLAKE/UUID
-          props:
-            worker-id: 999
-        tables:
-          test:
-            actual-data-nodes: lic-c-$->{0..1}.test_$->{2021..2022}_$->{1..12}
-            # 分表
-            table-strategy:
-              standard:
-                sharding-column: create_time
-                sharding-algorithm-name: bytablesignandid
-            # 分库
-            database-strategy:
-              standard:
-                sharding-column: id
-                sharding-algorithm-name: btdatabaseshareding
-            key-generator:
-              column: id # 自增列名称，缺省表示不使用自增主键生成器
-              key-generator-name: snowflake
-          star_demo:
-            actual-data-nodes: lic-c-$->{0..1}.star_demo
-#                分片算法名称和配置
-        sharding-algorithms:
-          # 策略名称 表策略 按照月份
-          bytablesignandid:
-            # 分片类型
-            type: auto_interval
-            props:
-              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
-              datetime-lower: "2021-01-01 00:00:00"
-              # 分片秒数 这里是一天一张表 所以秒数为86400秒  要加""不然会被解析为非字符串类型导致拿不到值
-              sharding-seconds: "31536000"
-              # 分片结束时间 要加""不然会被解析为非字符串类型导致拿不到值
-              datetime-upper: "2022-12-31 23:59:59"
-          btdatabaseshareding:
-            type: inline
-            props:
-              algorithm-expression: lic-c-$->{id%2}
-#      广播表规则列表
-        broadcast-tables:
-          - star_demo
-#        默认分库分表策略 默认不分片
-        default-database-strategy:
-          standard:
-            sharding-column: id
-            sharding-algorithm-name: btdatabaseshareding
-        default-table-strategy:
-          standard:
-            sharding-column: create_time
-            sharding-algorithm-name: bytablesignandid
-#            自增列生成算法名称和配置
-        key-generators:
-          snowflake:
-            type: SNOWFLAKE
-            props:
-              worker-id: 999
-    datasource:
-      names: lic-c-0,lic-c-1
-      lic-c-0:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
-        username: root
-        password: 123456
-        pool-name: HikariPool-lic-c-0
-        #连接建立超时时间 单位ms 默认30000
-        connection-timeout: 30000
-        # 连接的最大持有时间,0为无限制 默认 30 分钟
-        max-lifetime: 30000
-        # 连接池中最大维持的连接数量 默认初始连接池是 10
-        maximum-pool-size: 50
-      lic-c-1:
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
-        username: root
-        password: 123456
-        pool-name: HikariPool-lic-c-1
-        #连接建立超时时间 单位ms 默认30000
-        connection-timeout: 30000
-        # 连接的最大持有时间,0为无限制 默认 30 分钟
-        max-lifetime: 30000
-        # 连接池中最大维持的连接数量 默认初始连接池是 10
-        maximum-pool-size: 50
-#      lic-s-0:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-s-0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
-#        username: root
-#        password: 123456
-#        pool-name: HikariPool-lic-c-0
-#        #连接建立超时时间 单位ms 默认30000
-#        connection-timeout: 30000
-#        # 连接的最大持有时间,0为无限制 默认 30 分钟
-#        max-lifetime: 30000
-#        # 连接池中最大维持的连接数量 默认初始连接池是 10
-#        maximum-pool-size: 50
-#      lic-s-1:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-s-1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
-#        username: root
-#        password: 123456
-#        pool-name: HikariPool-lic-c-1
-#        #连接建立超时时间 单位ms 默认30000
-#        connection-timeout: 30000
-#        # 连接的最大持有时间,0为无限制 默认 30 分钟
-#        max-lifetime: 30000
-#        # 连接池中最大维持的连接数量 默认初始连接池是 10
-#        maximum-pool-size: 50
-    sharding:
-      default-data-source-name: lic-c-0
-      default-database-strategy:
-        none: 1
-    props:
-      sql-show: true
-#      sql-simple: true
-server:
-  port: 9011
-
-
-mybatis-plus:
-  mapperLocations: classpath*:/mapper/*.xml
-  configuration:
-    mapUnderscoreToCamelCase: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.sharding.demo.shardingdemo.entity
-
-
-
