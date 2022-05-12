@@ -39,7 +39,12 @@
             <version>3.5.1</version>
         </dependency>
 
-
+        <!--   guava baoxuexi  -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
 
 
 

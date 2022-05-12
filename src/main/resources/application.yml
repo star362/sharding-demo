@@ -89,9 +89,9 @@ spring:
       lic-c-0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.0.71:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: root
+        password: 123456
         pool-name: HikariPool-lic-c-0
         #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
@@ -108,9 +108,9 @@ spring:
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.0.71:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: root
+        password: 123456
         pool-name: HikariPool-lic-c-1
         #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
@@ -127,7 +127,7 @@ spring:
     sharding:
       default-data-source-name: lic-c-0
       default-database-strategy:
-        none: 1
+        none:
     props:
       sql-show: true
 #      sql-simple: true
