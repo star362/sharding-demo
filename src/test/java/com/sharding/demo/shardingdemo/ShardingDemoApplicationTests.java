@@ -87,21 +87,24 @@ class ShardingDemoApplicationTests {
 
     @Test
     void testServiceinsert() {
-        for (int i = 1; i < 10; i++) {
-            final TestEntity entity = TestEntity.builder().createTime("2021-0"+i+"-17 13:13:22").remark("" + 0).build();
-            testService.saveinfo(entity);
-            log.info("===插入成功==[{}]", entity);
-        }
+//        for (int i = 1; i < 10; i++) {
+//            final TestEntity entity = TestEntity.builder().createTime("2021-0"+i+"-17 13:13:22").remark("" + 0).build();
+//            testService.saveinfo(entity);
+//            log.info("===插入成功==[{}]", entity);
+//        }
 
 //        for (int i = 0; i < 10; i++) {
 //            final int insert = testService.insert(TestEntity.builder().remark("" + i).build());
 //
 //        }
 //        log.info("=====[{}]", arg);
-
-//        final TestEntity entity = TestEntity.builder().createTime(new Date(System.currentTimeMillis())).remark("" + 0).build();
-//        testService.insert(entity);
-//        log.info("===插入成功==[{}]", entity);
+        HintManager hintManager=HintManager.getInstance();
+        hintManager.setDatabaseShardingValue(0);
+        final TestEntity entity = TestEntity.builder().createTime("2022-05-17 13:13:22").remark("" + 0).build();
+        testService.insert(entity);
+        log.info("===插入成功==[{}]", entity);
+        hintManager.clearShardingValues();
+        hintManager.close();
 
     }
 
