@@ -33,11 +33,23 @@
                 </exclusion>
                 <exclusion>
                     <groupId>org.apache.shardingsphere</groupId>
+                    <artifactId>shardingsphere-shadow-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shardingsphere</groupId>
                     <artifactId>shardingsphere-encrypt-spring-boot-starter</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.apache.shardingsphere</groupId>
+                    <artifactId>shardingsphere-encrypt-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shardingsphere</groupId>
                     <artifactId>shardingsphere-cluster-mode-repository-zookeeper-curator</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shardingsphere</groupId>
+                    <artifactId>shardingsphere-cluster-mode-core</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.apache.zookeeper</groupId>

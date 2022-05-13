@@ -89,7 +89,7 @@ spring:
       lic-c-0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true&allowPublicKeyRetrieval=true
         username: root
         password: 123456
         pool-name: HikariPool-lic-c-0
@@ -108,7 +108,7 @@ spring:
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true&allowPublicKeyRetrieval=true
         username: root
         password: 123456
         pool-name: HikariPool-lic-c-1
