@@ -2,7 +2,10 @@ package com.sharding.demo.shardingdemo.coltroller;
 
 import com.sharding.demo.shardingdemo.service.StarDemoService;
 import com.sharding.demo.shardingdemo.service.impl.StarDemoServiceImpl;
+import org.apache.shardingsphere.transaction.annotation.ShardingSphereTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,4 +35,7 @@ public class TestController {
 
         return "success";
     }
+
+
+
 }

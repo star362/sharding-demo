@@ -1,18 +1,23 @@
 package com.sharding.demo.shardingdemo;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sharding.demo.shardingdemo.dao.StarDemoDao;
 import com.sharding.demo.shardingdemo.dao.TestDao;
 import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
 import com.sharding.demo.shardingdemo.entity.TestEntity;
+import com.sharding.demo.shardingdemo.service.StarDemoService;
 import org.apache.shardingsphere.infra.hint.HintManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +26,29 @@ import java.util.Map;
 class ShardingDemoApplicationTests {
 
     @Autowired
-    StarDemoDao starService;
+    @Qualifier("starDemoServiceImpl")
+    StarDemoService starService;
 
     @Autowired
     TestDao testService;
 
+
+    @Test
+    public void before(){
+        Arrays.stream(SpringUtil.getApplicationContext().getBeanDefinitionNames()).forEach(a->log.info("bean[{}]",a));
+
+
+//        transactionManager
+//        transactionTemplate
+    }
+
     @Test
     void contextLoads() {
 
-        final StarDemoEntity build = StarDemoEntity.builder().sex("男").starName("star").createTime(new Date(System.currentTimeMillis())).age(22).remarks("222").build();
+        final StarDemoEntity build = StarDemoEntity.builder()
+                .sex("男").starName("star")
+                .createTime(new Date(System.currentTimeMillis())).age(22).remarks("222")
+                .build();
 //        starService.insert(build);
         starService.saveinfo(build);
         log.info("StarDemoEntity[{}]", build);
