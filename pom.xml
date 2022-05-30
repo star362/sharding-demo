@@ -14,6 +14,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <shardingsphere.version>5.1.0</shardingsphere.version>
+        <packageZip>package</packageZip>
+        <JVM>-Xms256m -Xmx256m -XX:MetaspaceSize=64M -XX:MaxMetaspaceSize=128m</JVM>
     </properties>
 
     <dependencies>
@@ -51,10 +53,10 @@
                     <groupId>org.apache.shardingsphere</groupId>
                     <artifactId>shardingsphere-cluster-mode-core</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
+<!--                <exclusion>-->
+<!--                    <groupId>com.google.guava</groupId>-->
+<!--                    <artifactId>guava</artifactId>-->
+<!--                </exclusion>-->
                 <exclusion>
                     <groupId>org.apache.zookeeper</groupId>
                     <artifactId>zookeeper</artifactId>

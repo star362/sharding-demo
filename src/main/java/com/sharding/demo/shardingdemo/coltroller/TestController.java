@@ -53,7 +53,9 @@ public class TestController {
 
         HintManager hintManager=HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
-        final TestEntity entity = TestEntity.builder().createTime("2022-05-17 13:13:22").remark("" + 0).build();
+        final TestEntity entity = TestEntity.builder()
+//                .createTime("2022-05-17 13:13:22")
+                .remark("" + 0).build();
         testService.getTestDao().insert(entity);
         log.info("===插入成功==[{}]", entity);
         hintManager.clearShardingValues();

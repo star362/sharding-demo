@@ -41,7 +41,7 @@ public class TablesShardingAlgorithm implements ComplexKeysShardingAlgorithm<Dat
         });
 //        log.info("=============[{}]", valuesMap);
         Collection<String> result = new LinkedList();
-        result.add("test_2021_2");
+        result.add("test_2022_5");
         return result;
     }
 

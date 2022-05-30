@@ -47,7 +47,8 @@ class ShardingDemoApplicationTests {
 
         final StarDemoEntity build = StarDemoEntity.builder()
                 .sex("男").starName("star")
-                .createTime(new Date(System.currentTimeMillis())).age(22).remarks("222")
+//                .createTime(new Date(System.currentTimeMillis()))
+                .age(22).remarks("222")
                 .build();
 //        starService.insert(build);
         starService.saveinfo(build);
@@ -100,8 +101,25 @@ class ShardingDemoApplicationTests {
 //        log.info("=====[{}]", arg);
         HintManager hintManager=HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
-        final TestEntity entity = TestEntity.builder().createTime("2022-05-17 13:13:22").remark("" + 0).build();
+        final TestEntity entity = TestEntity.builder()
+//                .createTime("2022-05-17 13:13:22")
+                .remark("" + 0).build();
         testService.insert(entity);
+        log.info("===插入成功==[{}]", entity);
+        hintManager.clearShardingValues();
+        hintManager.close();
+
+    }
+
+
+    @Test
+    void testServiceupdate() {
+        HintManager hintManager=HintManager.getInstance();
+        hintManager.setDatabaseShardingValue(0);
+        final TestEntity entity = TestEntity.builder().id(1531214815027789825L)
+//                .createTime("2022-05-17 13:13:22")
+                .remark("" + 0).build();
+        testService.updateById(entity);
         log.info("===插入成功==[{}]", entity);
         hintManager.clearShardingValues();
         hintManager.close();
