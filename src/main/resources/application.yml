@@ -15,8 +15,11 @@ spring:
             # 分表
             table-strategy:
               standard:
-                sharding-column: create_time
-                sharding-algorithm-name: bytablesignandid3
+                sharding-column: id
+                sharding-algorithm-name: bytablesignandid4
+#              standard:
+#                sharding-column: create_time
+#                sharding-algorithm-name: bytablesignandid3
 #              complex:
 #                sharding-columns: create_time,id,remark
 #                sharding-algorithm-name: bytablesignandid2
@@ -55,6 +58,10 @@ spring:
               sharding-suffix-pattern:  "yyyy_M"
               datetime-interval-amount: 1
               datetime-interval-unit: MONTHS
+          bytablesignandid4:
+            type: STANDARD_DEMO
+            props:
+              algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.DBRangeShardingAlgorithm
           # 策略名称 表策略 按照月份
 #          bytablesignandid:
 #            # 分片类型
@@ -89,9 +96,9 @@ spring:
       lic-c-0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true&allowPublicKeyRetrieval=true
+        jdbc-url: jdbc:mysql://192.168.1.108:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: 123456
+        password: root@123
         pool-name: HikariPool-lic-c-0
         #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
@@ -108,9 +115,9 @@ spring:
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic-c-1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true&allowPublicKeyRetrieval=true
+        jdbc-url: jdbc:mysql://192.168.1.109:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
-        password: 123456
+        password: root@123
         pool-name: HikariPool-lic-c-1
         #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000

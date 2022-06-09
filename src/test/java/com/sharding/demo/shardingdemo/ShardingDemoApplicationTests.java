@@ -1,7 +1,9 @@
 package com.sharding.demo.shardingdemo;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.sharding.demo.shardingdemo.dao.StarDemoDao;
 import com.sharding.demo.shardingdemo.dao.TestDao;
 import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
@@ -80,6 +82,22 @@ class ShardingDemoApplicationTests {
         List<TestEntity> testEntities = testService.selectList(wrapper);
         testEntities.forEach(arg->{log.info("=====[{}]", arg);});
 
+    }
+
+
+    @Test
+    void likeTest() {
+        HintManager hintManager=HintManager.getInstance();
+        hintManager.setDatabaseShardingValue(0);
+
+        TestEntity build = TestEntity.builder().id(1531214569178730497L).build();
+
+        LambdaQueryWrapper<TestEntity> like = Wrappers.<TestEntity>lambdaQuery().between(TestEntity::getId, 1,100);
+
+        List<TestEntity> testEntities = testService.selectList(like);
+        testEntities.forEach(arg->{log.info("==like===[{}]", arg);});
+        hintManager.clearShardingValues();
+        hintManager.close();
     }
 
 

@@ -1,2 +1,3 @@
 com.sharding.demo.shardingdemo.sharding.TablesShardingAlgorithm
 com.sharding.demo.shardingdemo.sharding.DBShardingAlgorithm
+com.sharding.demo.shardingdemo.sharding.DBRangeShardingAlgorithm
