@@ -11,7 +11,8 @@ import java.util.Collection;
 
 /**
  * <p>
- *  标准分片 单字段
+ *  标准分片 单字段、、
+ *  提供对SQL语句中的=, IN和BETWEEN AND的分片操作支持
  * </p>
  *
  * @version 1.0
