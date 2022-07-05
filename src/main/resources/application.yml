@@ -149,5 +149,18 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.sharding.demo.shardingdemo.entity
 
+arthas:
+  agent-id: ${ARTHAS_AGENT_ID:hsehdfsfghhwertyfad-${random.int[10,20]}}
+  app-name: ${spring.application.name}
+  tunnel-server: ${ARTHAS_TUNNEL_SERVER:ws://localhost:7777/ws}
+  # 通过http访问的端口
+  http-port: 8563
+  # 通过telnet访问的端口
+  telnet-port: 3658
+  session-timeout: 1800
+  # 绑定的ip
+  ip: 0.0.0.0
+
+
 
 

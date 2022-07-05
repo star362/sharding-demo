@@ -14,6 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <shardingsphere.version>5.1.0</shardingsphere.version>
+        <arthas.version>3.6.2</arthas.version>
         <packageZip>package</packageZip>
         <JVM>-Xms256m -Xmx256m -XX:MetaspaceSize=64M -XX:MaxMetaspaceSize=128m</JVM>
     </properties>
@@ -102,6 +103,12 @@
 <!--            <version>${shardingsphere.version}</version>-->
 <!--        </dependency>-->
 
+<!--        添加arthas 监控-->
+        <dependency>
+            <groupId>com.taobao.arthas</groupId>
+            <artifactId>arthas-spring-boot-starter</artifactId>
+            <version>${arthas.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
