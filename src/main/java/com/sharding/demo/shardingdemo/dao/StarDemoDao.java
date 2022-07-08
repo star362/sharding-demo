@@ -2,6 +2,7 @@ package com.sharding.demo.shardingdemo.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sharding.demo.shardingdemo.entity.StarDemoEntity;
+import org.apache.ibatis.annotations.CacheNamespaceRef;
 import org.apache.ibatis.annotations.Select;
 
 /**
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
  *
  * @author wangyu@mvtech.com.cn
  */
+//@CacheNamespaceRef(name = "com.sharding.demo.shardingdemo.dao.StarDemoDao")
 public interface StarDemoDao extends BaseMapper<StarDemoEntity> {
 
 

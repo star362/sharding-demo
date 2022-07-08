@@ -7,6 +7,8 @@
         <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
+<!--    <cache type="com.sunia.developer.licensemanager.cache.MybatisRedisCache"></cache>-->
+
     <insert id="saveinfo" parameterType="com.sharding.demo.shardingdemo.entity.StarDemoEntity">
 
         insert into star_demo (id,age,sex,star_name,create_time,remarks) values (#{id},#{age},#{sex},#{starName},#{createTime}, #{remarks})
