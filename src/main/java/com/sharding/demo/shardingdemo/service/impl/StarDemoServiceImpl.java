@@ -25,12 +25,12 @@ public class StarDemoServiceImpl implements StarDemoService {
 
 
     /**
-     *
      * @param starDemoEntity
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    @ShardingSphereTransactionType(TransactionType.LOCAL)  // 支持TransactionType.LOCAL, TransactionType.XA, TransactionType.BASE
+    @ShardingSphereTransactionType(TransactionType.LOCAL)
+    // 支持TransactionType.LOCAL, TransactionType.XA, TransactionType.BASE
     @Override
     public int saveinfo(StarDemoEntity starDemoEntity) {
         return starDemoDao.saveinfo(starDemoEntity);

@@ -36,8 +36,8 @@ class ShardingDemoApplicationTests {
 
 
     @Test
-    public void before(){
-        Arrays.stream(SpringUtil.getApplicationContext().getBeanDefinitionNames()).forEach(a->log.info("bean[{}]",a));
+    public void before() {
+        Arrays.stream(SpringUtil.getApplicationContext().getBeanDefinitionNames()).forEach(a -> log.info("bean[{}]", a));
 
 
 //        transactionManager
@@ -77,25 +77,29 @@ class ShardingDemoApplicationTests {
 //        TestEntity build = TestEntity.builder().id(1515598883979067394L).build();
 //        TestEntity build = TestEntity.builder().id(1515608863562113025L).build();
         TestEntity build = TestEntity.builder().build();
-        QueryWrapper<TestEntity> wrapper=new QueryWrapper();
+        QueryWrapper<TestEntity> wrapper = new QueryWrapper();
         wrapper.setEntity(build);
         List<TestEntity> testEntities = testService.selectList(wrapper);
-        testEntities.forEach(arg->{log.info("=====[{}]", arg);});
+        testEntities.forEach(arg -> {
+            log.info("=====[{}]", arg);
+        });
 
     }
 
 
     @Test
     void likeTest() {
-        HintManager hintManager=HintManager.getInstance();
+        HintManager hintManager = HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
 
         TestEntity build = TestEntity.builder().id(1531214569178730497L).build();
 
-        LambdaQueryWrapper<TestEntity> like = Wrappers.<TestEntity>lambdaQuery().between(TestEntity::getId, 1,100);
+        LambdaQueryWrapper<TestEntity> like = Wrappers.<TestEntity>lambdaQuery().between(TestEntity::getId, 1, 100);
 
         List<TestEntity> testEntities = testService.selectList(like);
-        testEntities.forEach(arg->{log.info("==like===[{}]", arg);});
+        testEntities.forEach(arg -> {
+            log.info("==like===[{}]", arg);
+        });
         hintManager.clearShardingValues();
         hintManager.close();
     }
@@ -117,7 +121,7 @@ class ShardingDemoApplicationTests {
 //
 //        }
 //        log.info("=====[{}]", arg);
-        HintManager hintManager=HintManager.getInstance();
+        HintManager hintManager = HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
         final TestEntity entity = TestEntity.builder()
 //                .createTime("2022-05-17 13:13:22")
@@ -132,7 +136,7 @@ class ShardingDemoApplicationTests {
 
     @Test
     void testServiceupdate() {
-        HintManager hintManager=HintManager.getInstance();
+        HintManager hintManager = HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
         final TestEntity entity = TestEntity.builder().id(1531214815027789825L)
 //                .createTime("2022-05-17 13:13:22")
@@ -146,15 +150,17 @@ class ShardingDemoApplicationTests {
 
 
     @Test
-    public void testHint(){
-        HintManager hintManager=HintManager.getInstance();
+    public void testHint() {
+        HintManager hintManager = HintManager.getInstance();
         hintManager.setDatabaseShardingValue(0);
 
         TestEntity build = TestEntity.builder().build();
-        QueryWrapper<TestEntity> wrapper=new QueryWrapper();
+        QueryWrapper<TestEntity> wrapper = new QueryWrapper();
         wrapper.setEntity(build);
         List<TestEntity> testEntities = testService.selectList(wrapper);
-        testEntities.forEach(arg->{log.info("=====[{}]", arg);});
+        testEntities.forEach(arg -> {
+            log.info("=====[{}]", arg);
+        });
 
         hintManager.clearShardingValues();
         hintManager.close();

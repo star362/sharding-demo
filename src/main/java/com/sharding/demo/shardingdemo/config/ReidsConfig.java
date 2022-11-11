@@ -36,10 +36,10 @@ public class ReidsConfig {
 
     @Bean("jedisConnectionFactory")
     @Primary
-    public JedisConnectionFactory jedisConnectionFactory(){
-        JedisPoolConfig jedisPoolConfig=new JedisPoolConfig();
+    public JedisConnectionFactory jedisConnectionFactory() {
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         //redis连接配置
-        RedisStandaloneConfiguration redisStandaloneConfiguration=new RedisStandaloneConfiguration();
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         //设置连接的ip
         redisStandaloneConfiguration.setHostName("192.168.9.140");
         //设置密码
@@ -55,24 +55,24 @@ public class ReidsConfig {
         //连接池
         jedisClientConfiguration.usePooling().poolConfig(jedisPoolConfig);
         //工厂对象
-        JedisConnectionFactory factory=new JedisConnectionFactory(redisStandaloneConfiguration,jedisClientConfiguration.build());
+        JedisConnectionFactory factory = new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration.build());
         return factory;
     }
 
     @Bean("redisTemplate")
     @Primary
-    public RedisTemplate<String,Object> RedisTemplate(@Qualifier("jedisConnectionFactory") RedisConnectionFactory redisConnectionFactory){
-        RedisTemplate<String,Object> redisTemplate=new RedisTemplate<>();
-        initRedisTemplate(redisTemplate,redisConnectionFactory);
+    public RedisTemplate<String, Object> RedisTemplate(@Qualifier("jedisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        initRedisTemplate(redisTemplate, redisConnectionFactory);
         return redisTemplate;
     }
 
     /**
-     * @deprecated : 初始化RedisTemplate的配置，配置序列化and工厂
      * @param redisTemplate
      * @return
+     * @deprecated : 初始化RedisTemplate的配置，配置序列化and工厂
      */
-    public void initRedisTemplate(RedisTemplate<String,Object> redisTemplate, RedisConnectionFactory factory){
+    public void initRedisTemplate(RedisTemplate<String, Object> redisTemplate, RedisConnectionFactory factory) {
         // json 序列化配置，序列化所有对象
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
@@ -97,8 +97,6 @@ public class ReidsConfig {
         //设置连接工厂
         redisTemplate.setConnectionFactory(factory);
     }
-
-
 
 
 }

@@ -14,20 +14,20 @@ spring:
             actual-data-nodes: lic-c-$->{0..1}.test_$->{2021..2022}_$->{1..12}
             # 分表
             table-strategy:
+              #              standard:
+              #                sharding-column: id
+              #                sharding-algorithm-name: bytablesignandid4
               standard:
-                sharding-column: id
-                sharding-algorithm-name: bytablesignandid4
-#              standard:
-#                sharding-column: create_time
-#                sharding-algorithm-name: bytablesignandid3
-#              complex:
-#                sharding-columns: create_time,id,remark
-#                sharding-algorithm-name: bytablesignandid2
+                sharding-column: create_time
+                sharding-algorithm-name: bytablestandard
+            #              complex:
+            #                sharding-columns: create_time,id,remark
+            #                sharding-algorithm-name: bytablesignandid2
             # 分库
             database-strategy:
-#              standard:
-#                sharding-column: id
-#                sharding-algorithm-name: byid
+              #              standard:
+              #                sharding-column: id
+              #                sharding-algorithm-name: byid
               hint:
                 sharding-algorithm-name: db_hint_test
             key-generate-strategy: # 分布式序列策略
@@ -49,7 +49,7 @@ spring:
             type: HINT_TEST
             props:
               algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.DBShardingAlgorithm
-          bytablesignandid3:
+          bytablestandard:
             type: INTERVAL
             props:
               datetime-pattern: "yyyy-MM-dd HH:mm:ss"
@@ -63,17 +63,17 @@ spring:
             props:
               algorithm-clas-name: com.sharding.demo.shardingdemo.sharding.DBRangeShardingAlgorithm
           # 策略名称 表策略 按照月份
-#          bytablesignandid:
-#            # 分片类型
-#            type: auto_interval
-#            props:
-#              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
-#              datetime-lower: "2021-01-01 00:00:00"
-#              # 分片秒数 这里是一天一张表 所以秒数为86400秒  要加""不然会被解析为非字符串类型导致拿不到值
-#              sharding-seconds: "31536000"
-#              # 分片结束时间 要加""不然会被解析为非字符串类型导致拿不到值
-#              datetime-upper: "2022-12-31 23:59:59"
-#      广播表规则列表
+        #          bytablesignandid:
+        #            # 分片类型
+        #            type: auto_interval
+        #            props:
+        #              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
+        #              datetime-lower: "2021-01-01 00:00:00"
+        #              # 分片秒数 这里是一天一张表 所以秒数为86400秒  要加""不然会被解析为非字符串类型导致拿不到值
+        #              sharding-seconds: "31536000"
+        #              # 分片结束时间 要加""不然会被解析为非字符串类型导致拿不到值
+        #              datetime-upper: "2022-12-31 23:59:59"
+        #      广播表规则列表
         broadcast-tables:
           - star_demo
         #        默认分库分表策略 默认不分片
@@ -86,7 +86,7 @@ spring:
           snowflake:
             type: SNOWFLAKE
             props:
-              worker-id: 999
+              worker-id: ${random.int[0,999]}
               #              最大抖动上限值，范围[0, 4096)。注：若使用此算法生成值作分片值，建议配置此属性。此算法在不同毫秒内所生成的 key 取模 2^n (2^n一般为分库或分表数) 之后结果总为 0 或 1。为防止上述分片问题，建议将此属性值配置为 (2^n)-1
               max-vibration-offset: 1
               #              最大容忍时钟回退时间，单位：毫秒
@@ -96,7 +96,7 @@ spring:
       lic-c-0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://192.168.1.108:3306/lic_c_0?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
         password: root@123
         pool-name: HikariPool-lic-c-0
@@ -115,10 +115,10 @@ spring:
       lic-c-1:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/lic_c_1?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+        jdbc-url: jdbc:mysql://192.168.1.110:3306/lic_c_2?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowMultiQueries=true
         username: root
         password: root@123
-        pool-name: HikariPool-lic-c-1
+        pool-name: HikariPool-lic-c-2
         #连接最大存活时间,默认值30分钟.设置应该比mysql设置的超时时间短
         max-lifetime: 30000
         #最大连接数，小于等于0会被重置为默认值10；大于零小于1会被重置为minimum-idle的值
@@ -138,6 +138,10 @@ spring:
     props:
       sql-show: true
 #      sql-simple: true
+  jooq:
+    sql-dialect: mysql
+  flyway:
+    baseline-on-migrate: true
 server:
   port: 9011
 

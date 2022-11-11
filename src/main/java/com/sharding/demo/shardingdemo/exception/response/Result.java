@@ -14,16 +14,16 @@ public class Result<T> implements java.io.Serializable {
 
     private static final long serialVersionUID = 1332083554709890293L;
 
-//    @ApiModelProperty(value = "返回对象")
+    //    @ApiModelProperty(value = "返回对象")
     private T data;
 
-//    @ApiModelProperty(value = "内部状态编码")
+    //    @ApiModelProperty(value = "内部状态编码")
     private String respCode;
 
-//    @ApiModelProperty(value = "提示消息")
+    //    @ApiModelProperty(value = "提示消息")
     private String respMessage;
 
-//    @ApiModelProperty(value = "oken信息")
+    //    @ApiModelProperty(value = "oken信息")
     private String token;
 
     public Result() {
@@ -164,12 +164,9 @@ public class Result<T> implements java.io.Serializable {
     /**
      * 创建一个带有<b>状态</b>、<b>消息</b>和<b>数据</b>的结果对象.
      *
-     * @param code
-     *            状态
-     * @param message
-     *            消息内容
-     * @param data
-     *            数据
+     * @param code    状态
+     * @param message 消息内容
+     * @param data    数据
      * @return 结构数据
      */
     public static <T> Result<T> buildResult(String code, String message, T data) {

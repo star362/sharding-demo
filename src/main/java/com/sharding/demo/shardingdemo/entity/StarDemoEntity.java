@@ -1,6 +1,7 @@
 package com.sharding.demo.shardingdemo.entity;
 
 //import com.baomidou.mybatisplus.annotation.TableName;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;

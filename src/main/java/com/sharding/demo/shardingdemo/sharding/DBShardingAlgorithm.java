@@ -26,8 +26,7 @@ public class DBShardingAlgorithm implements HintShardingAlgorithm<String> {
         log.info("=======lic-c-0=====lic-c-1==========", values);
 
 
-
-        return Arrays.asList("lic-c-"+values.toArray()[0]);
+        return Arrays.asList("lic-c-" + values.toArray()[0]);
     }
 
     @Override

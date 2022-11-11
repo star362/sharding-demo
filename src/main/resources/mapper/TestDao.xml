@@ -5,7 +5,7 @@
     <resultMap type="com.sharding.demo.shardingdemo.entity.TestEntity" id="EmailInfoMap">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" />
+        <result property="createTime" column="create_time"/>
     </resultMap>
     <!--        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">-->
     <!--            SELECT LAST_INSERT_ID()-->
@@ -15,7 +15,6 @@
         insert into test (id,create_time,remark) values (#{id},#{createTime}, #{remark})
 
     </insert>
-
 
 
 </mapper>

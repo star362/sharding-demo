@@ -11,8 +11,8 @@ import java.util.Collection;
 
 /**
  * <p>
- *  标准分片 单字段、、
- *  提供对SQL语句中的=, IN和BETWEEN AND的分片操作支持
+ * 标准分片 单字段、、
+ * 提供对SQL语句中的=, IN和BETWEEN AND的分片操作支持
  * </p>
  *
  * @version 1.0
@@ -36,7 +36,7 @@ public class DBRangeShardingAlgorithm implements StandardShardingAlgorithm<Long>
 
         log.info("======rangeShardingValue=====collection========{}", JSONUtil.toJsonStr(collection));
 
-        log.info("===========rangeShardingValue========{}",rangeShardingValue);
+        log.info("===========rangeShardingValue========{}", rangeShardingValue);
 
         return ListUtil.toLinkedList("test_2022_5");
     }

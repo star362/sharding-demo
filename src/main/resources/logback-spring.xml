@@ -67,22 +67,22 @@
 
 
     <!-- 开发环境和测试环境 -->
-<!--    <springProfile name="dev">-->
-<!--        <root level="INFO">-->
-<!--            <appender-ref ref="STDOUT"/>-->
-<!--            <appender-ref ref="FILE"/>-->
-<!--            <appender-ref ref="fileErrorLog"/>-->
-<!--        </root>-->
-<!--    </springProfile>-->
+    <!--    <springProfile name="dev">-->
+    <!--        <root level="INFO">-->
+    <!--            <appender-ref ref="STDOUT"/>-->
+    <!--            <appender-ref ref="FILE"/>-->
+    <!--            <appender-ref ref="fileErrorLog"/>-->
+    <!--        </root>-->
+    <!--    </springProfile>-->
 
     <!-- 生产环境 -->
-<!--    <springProfile name="pro">-->
-<!--        <root level="INFO">-->
-<!--            <appender-ref ref="STDOUT"/>-->
-<!--            <appender-ref ref="FILE"/>-->
-<!--            <appender-ref ref="fileErrorLog"/>-->
-<!--        </root>-->
-<!--    </springProfile>-->
+    <!--    <springProfile name="pro">-->
+    <!--        <root level="INFO">-->
+    <!--            <appender-ref ref="STDOUT"/>-->
+    <!--            <appender-ref ref="FILE"/>-->
+    <!--            <appender-ref ref="fileErrorLog"/>-->
+    <!--        </root>-->
+    <!--    </springProfile>-->
 
 
     <root level="INFO">

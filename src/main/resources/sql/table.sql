@@ -1,183 +1,184 @@
 create table star_demo
 (
-    id          bigint       not null
+    id          bigint not null
         primary key,
-    star_name   varchar(10)  null,
-    sex         varchar(2)   null,
-    age         int          null,
+    star_name   varchar(10) null,
+    sex         varchar(2) null,
+    age         int null,
     remarks     varchar(500) null,
-    create_time datetime     null
+    create_time datetime null
 );
 
 create table test_2021_1
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_10
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_11
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_12
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_2
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_3
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_4
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_5
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_6
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_7
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_8
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2021_9
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_1
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_10
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_11
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_12
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_2
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_3
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_4
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_5
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_6
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
-create tabletest_2022_7
+create
+tabletest_2022_7
 (
     id          bigint      not null
         primary key,
@@ -187,76 +188,92 @@ create tabletest_2022_7
 
 create table test_2022_8
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 create table test_2022_9
 (
-    id          bigint      not null
+    id          bigint not null
         primary key,
-    create_time datetime    null,
+    create_time datetime null,
     remark      varchar(64) null
 );
 
 
 
-
-
-
-
-
-
-
-
-SELECT * from test_2021_1
+SELECT *
+from test_2021_1
 union
-SELECT * from test_2021_2
+SELECT *
+from test_2021_2
 union
-SELECT * from test_2021_3
+SELECT *
+from test_2021_3
 union
-SELECT * from test_2021_4
+SELECT *
+from test_2021_4
 union
-SELECT * from test_2021_5
+SELECT *
+from test_2021_5
 union
-SELECT * from test_2021_6
+SELECT *
+from test_2021_6
 union
-SELECT * from test_2021_7
+SELECT *
+from test_2021_7
 union
-SELECT * from test_2021_8
+SELECT *
+from test_2021_8
 union
-SELECT * from test_2021_9
+SELECT *
+from test_2021_9
 union
-SELECT * from test_2021_10
+SELECT *
+from test_2021_10
 union
-SELECT * from test_2021_11
+SELECT *
+from test_2021_11
 union
-SELECT * from test_2021_12
+SELECT *
+from test_2021_12
 union
-SELECT * from test_2022_1
+SELECT *
+from test_2022_1
 union
-SELECT * from test_2022_2
+SELECT *
+from test_2022_2
 union
-SELECT * from test_2022_3
+SELECT *
+from test_2022_3
 union
-SELECT * from test_2022_4
+SELECT *
+from test_2022_4
 union
-SELECT * from test_2022_5
+SELECT *
+from test_2022_5
 union
-SELECT * from test_2022_6
+SELECT *
+from test_2022_6
 union
-SELECT * from test_2022_7
+SELECT *
+from test_2022_7
 union
-SELECT * from test_2022_8
+SELECT *
+from test_2022_8
 union
-SELECT * from test_2022_9
+SELECT *
+from test_2022_9
 union
-SELECT * from test_2022_10
+SELECT *
+from test_2022_10
 union
-SELECT * from test_2022_11
+SELECT *
+from test_2022_11
 union
-SELECT * from test_2022_12
+SELECT *
+from test_2022_12
 
 

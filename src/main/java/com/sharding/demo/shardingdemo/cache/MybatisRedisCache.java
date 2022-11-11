@@ -22,7 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Slf4j
 public class MybatisRedisCache implements Cache {
 
-    private static RedisTemplate<String , Object> redisTemplate;
+    private static RedisTemplate<String, Object> redisTemplate;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
 
@@ -47,16 +47,16 @@ public class MybatisRedisCache implements Cache {
     @Override
     public void putObject(Object key, Object value) {
         if (!ObjectUtil.isEmpty(value)) {
-            redisTemplate.opsForHash().put(id, key.toString() , value);
-            log.info("mybatis缓存,{}:[{}]" , key , value );
+            redisTemplate.opsForHash().put(id, key.toString(), value);
+            log.info("mybatis缓存,{}:[{}]", key, value);
         }
     }
 
     @Override
     public Object getObject(Object key) {
         if (!ObjectUtil.isEmpty(key)) {
-            Object object = redisTemplate.opsForHash().get(id , key.toString());
-            log.info("mybatis缓存读取,{}:[{}]", key , object);
+            Object object = redisTemplate.opsForHash().get(id, key.toString());
+            log.info("mybatis缓存读取,{}:[{}]", key, object);
             return object;
         }
         return null;

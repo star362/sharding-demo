@@ -2,7 +2,7 @@ package com.sharding.demo.shardingdemo.resps;
 
 public enum ErrorsMessageEnum {
 
-    FAILURE("-1","错误"),
+    FAILURE("-1", "错误"),
 
     ;
 

@@ -2,7 +2,7 @@ package com.sharding.demo.shardingdemo.resps;
 
 public enum SuccessMessageEnum {
 
-    LOGIN_SUCCESS("1","成功！"),
+    LOGIN_SUCCESS("1", "成功！"),
 
     ;
 
