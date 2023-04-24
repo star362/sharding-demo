@@ -32,3 +32,4 @@ build/
 /.mvn/
 .DS_Store
 /logs/
+classes
