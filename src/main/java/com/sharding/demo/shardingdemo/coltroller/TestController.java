@@ -82,8 +82,8 @@ public class TestController {
 
 
     @SneakyThrows
-    @GetMapping("exportprodsku")
-    public void exportprodsku(
+    @GetMapping("export")
+    public void export(
             HttpServletResponse response) {
 
 
