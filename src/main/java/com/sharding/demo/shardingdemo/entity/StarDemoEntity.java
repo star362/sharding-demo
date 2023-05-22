@@ -4,6 +4,8 @@ package com.sharding.demo.shardingdemo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,4 +29,9 @@ public class StarDemoEntity {
     private String starName;
     private String sex;
     private Integer age;
+
+
+//    @JsonSerialize(using = ToStringSerializer.class)
+//    @JsonDeserialize(using = StringDeserializer.class)
+//    private Long activityNum;
 }
